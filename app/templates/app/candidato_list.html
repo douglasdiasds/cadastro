@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lista de candidatos</title>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css"> 
+	<link href="{% static 'css/app.css' %}" rel="stylesheet">	
+</head>
+<body>
+	<h1><a href="/"> Lista de candidatos: </a></h1>
+	{% block content %}
+		{% for cand in candidatos %}
+			<p>
+			<div><a href="{% url 'candidato_detalhe' pk=cand.pk %}">Nome:{{ cand.name }}</a></div>
+			<div id="med">Média:{{cand.med}}</div>
+			</p>
+		{% endfor %}
+	{% endblock content %}
+</body>
+</html>
+
