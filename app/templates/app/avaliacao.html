@@ -4,11 +4,11 @@
 	<title>Avaliação</title>
 </head>
 <body>
-<p>Avaliação</p>
+<h1>Avaliação</h1>
 	{% for crit in criterios %}
-		<p>
-		<div>Nome:{{ crit }}</div>
-		</p>
+		<div>
+		<p id='crit'>Nome:{{ crit }}</p>
+		</div>
 	{% endfor %}
 </body>
 </html>
