@@ -20,7 +20,6 @@ def cadastrar(request):
 		form = CandForm(request.POST)
 		if form.is_valid():
 			post = form.save(commit=False)
-			post.name = request.user
 			post.save()
 			return redirect('candidato_detalhe', pk=post.pk)
 	else:
