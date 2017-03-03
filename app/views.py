@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Candidato, Criterio
 from django import forms
-from .forms import CandForm
+from .forms import CandForm, AvalForm
 
 def canditato_list(request):
 	candidatos = Candidato.objects.all()
@@ -13,6 +13,7 @@ def candidato_detalhe(request, pk):
 
 def avaliar(request):
 	criterios = Criterio.objects.all()
+	form2 = AvalForm()
 	return render(request, 'app/avaliacao.html', {'criterios': criterios})
 
 def cadastrar(request):

@@ -4,11 +4,12 @@
 	<title>Avaliação</title>
 </head>
 <body>
-<h1>Avaliação</h1>
-	{% for crit in criterios %}
-		<div>
-		<p id='crit'>Nome:{{ crit }}</p>
-		</div>
-	{% endfor %}
+<h1>Cadastro</h1>
+<form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Guardar</button>
+    </form>
+    <p> {{ criterios }} </p>
 </body>
+</html>
 </html>
