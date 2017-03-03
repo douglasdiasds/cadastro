@@ -16,5 +16,13 @@ def avaliar(request):
 	return render(request, 'app/avaliacao.html', {'criterios': criterios})
 
 def cadastrar(request):
-    form = CandForm()
-    return render(request, 'app/cadastro.html', {'form': form})
+	if request.method == "POST":
+		form = CandForm(request.POST)
+		if form.is_valid():
+			post = form.save(commit=False)
+			post.name = request.user
+			post.save()
+			return redirect('candidato_detalhe', pk=post.pk)
+	else:
+		form = CandForm()
+		return render(request, 'app/cadastro.html', {'form': form})
