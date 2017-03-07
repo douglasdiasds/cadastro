@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-</!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Cadastro</title>
 </head>
 <body>
 <h1>Cadastro</h1>
-<form method="POST" class="post-form">{% csrf_token %}
+	<form method="POST" class="post-form">
+		{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Guardar</button>
     </form>
