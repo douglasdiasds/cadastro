@@ -1,4 +1,4 @@
-from .models import Candidato, Criterio
+from .models import Candidato, Avaliacao
 from django import forms
 
 class CandForm(forms.ModelForm):
@@ -8,5 +8,5 @@ class CandForm(forms.ModelForm):
 
 class AvalForm(forms.ModelForm):
 	class Meta:
-		model = Criterio
-		fields = ('label',)
+		model = Avaliacao
+		fields = ('criterio','avaliador','value','candidato')

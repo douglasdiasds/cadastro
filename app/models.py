@@ -14,7 +14,6 @@ class Candidato(models.Model):
 	linkedin = models.URLField(max_length=100, default = '')
 	cover_letter = models.TextField(default = '')
 	Ensino_superior = models.BooleanField(default = False)
-	#criterio = models.ForeignKey(Criterio, default = '')
 	med = models.IntegerField(default = 0)
 	#talvez tenha que alterrar essa linha
 	docfile = models.FileField(upload_to='/home/douglas/Documentos/Django/my-second-blog/site_/media', null=True, blank=True)
@@ -25,8 +24,9 @@ class Candidato(models.Model):
 
 class Avaliacao(models.Model):
 	candidato = models.ForeignKey(Candidato)
-	criterio = models.ForeignKey(Criterio, default = '')
+	criterio = models.ManyToManyField(Criterio, default = '')
+	value = models.IntegerField(default = 0, db_index = True)
 	avaliador = models.ForeignKey('auth.User')
 
 	def  __str__(self):
-		return self.candidato
+		return self

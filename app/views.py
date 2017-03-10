@@ -14,9 +14,9 @@ def candidato_detalhe(request, pk):
     return render(request, 'app/candidato_detalhe.html', {'candidato': candidato})
 
 def avaliar(request):
-	criterios = Criterio.objects.all()
+	#criterios = Criterio.objects.all()
 	form2 = AvalForm()
-	return render(request, 'app/avaliacao.html', {'criterios': criterios})
+	return render(request, 'app/avaliacao.html', {'criterios': form2})
 
 def cadastrar(request):
 	if request.method == "POST":
