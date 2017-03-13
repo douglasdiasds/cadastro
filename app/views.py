@@ -14,7 +14,7 @@ def candidato_detalhe(request, pk):
     return render(request, 'app/candidato_detalhe.html', {'candidato': candidato})
 
 def avaliar(request):
-	#criterios = Criterio.objects.all()
+	criterios = Criterio.objects.all()
 	form2 = AvalForm()
 	return render(request, 'app/avaliacao.html', {'criterios': form2})
 

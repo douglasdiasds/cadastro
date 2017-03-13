@@ -21,12 +21,20 @@ class Candidato(models.Model):
 	def  __str__(self):
 		return self.name
 
+class Aval(models.Model):
+	criterio = models.ManyToManyField(Criterio)
+	nota = models.IntegerField()
+
+	def  __str__(self):
+		return self
+
 
 class Avaliacao(models.Model):
 	candidato = models.ForeignKey(Candidato)
-	criterio = models.ManyToManyField(Criterio, default = '')
-	value = models.IntegerField(default = 0, db_index = True)
+	criterio = models.ManyToManyField(Criterio)
+	#nota = models.IntegerField(default = '')
 	avaliador = models.ForeignKey('auth.User')
+	aval = models.ForeignKey(Aval)
 
 	def  __str__(self):
 		return self
