@@ -1,5 +1,7 @@
 from django.db import models
+from jsonfield import JSONField
 from site_.settings import MEDIA_ROOT
+from django.core.validators import MaxValueValidator
 
 class Criterio(models.Model):
 	label = models.CharField(max_length=100)
@@ -31,10 +33,9 @@ class Aval(models.Model):
 
 class Avaliacao(models.Model):
 	candidato = models.ForeignKey(Candidato)
-	criterio = models.ManyToManyField(Criterio)
-	#nota = models.IntegerField(default = '')
+	criterio = models.ForeignKey(Criterio, default='')
+	nota = models.PositiveIntegerField(default = 0, validators=[MaxValueValidator(10)])
 	avaliador = models.ForeignKey('auth.User')
-	aval = models.ForeignKey(Aval)
 
 	def  __str__(self):
 		return self

@@ -14,10 +14,18 @@ def candidato_detalhe(request, pk):
     return render(request, 'app/candidato_detalhe.html', {'candidato': candidato})
 
 def avaliar(request):
-	criterios = Criterio.objects.all()
-	form2 = AvalForm()
-	return render(request, 'app/avaliacao.html', {'criterios': form2})
+	#criterios = Criterio.objects.all()
+	if request.method == "POST":
+		form2 = AvalForm(request.POST)
+		if form2.is_valid():
+			post = form2.save(commit=False)
+			post.save()
+			return redirect('canditato_list', pk=post.pk)
+	else:
+		form2 = AvalForm()
+		return render(request, 'app/avaliacao.html', {'criterios': form2})
 
+	
 def cadastrar(request):
 	if request.method == "POST":
 		form = CandForm(request.POST)
