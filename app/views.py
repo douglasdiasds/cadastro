@@ -20,7 +20,7 @@ def avaliar(request):
 		if form2.is_valid():
 			post = form2.save(commit=False)
 			post.save()
-			return redirect('canditato_list', pk=post.pk)
+			return redirect('canditato_list')
 	else:
 		form2 = AvalForm()
 		return render(request, 'app/avaliacao.html', {'criterios': form2})

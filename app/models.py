@@ -23,13 +23,6 @@ class Candidato(models.Model):
 	def  __str__(self):
 		return self.name
 
-class Aval(models.Model):
-	criterio = models.ManyToManyField(Criterio)
-	nota = models.IntegerField()
-
-	def  __str__(self):
-		return self
-
 
 class Avaliacao(models.Model):
 	candidato = models.ForeignKey(Candidato)
