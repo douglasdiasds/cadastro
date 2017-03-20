@@ -31,4 +31,5 @@ class Avaliacao(models.Model):
 	avaliador = models.ForeignKey('auth.User')
 
 	def  __str__(self):
-		return self
+		#return str(self.candidato)
+		return str(self.t)

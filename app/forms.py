@@ -10,6 +10,7 @@ class AvalForm(forms.ModelForm):
 	class Meta:
 		model = Avaliacao
 		fields = ('criterio','nota','candidato','avaliador')
+		
 		"""
 		model = Avaliacao
 		fields = ('candidato','avaliador','aval',)
