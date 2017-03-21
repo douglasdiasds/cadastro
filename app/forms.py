@@ -1,4 +1,4 @@
-from .models import Candidato, Avaliacao#, Aval
+from .models import Candidato, Avaliacao, Teste
 from django import forms
 
 class CandForm(forms.ModelForm):
@@ -9,9 +9,6 @@ class CandForm(forms.ModelForm):
 class AvalForm(forms.ModelForm):
 	class Meta:
 		model = Avaliacao
-		fields = ('criterio','nota','candidato','avaliador')
+		fields = ('candidato','criterio','nota','avaliador')
+		#fields = ('v1','v2')
 		
-		"""
-		model = Avaliacao
-		fields = ('candidato','avaliador','aval',)
-		"""

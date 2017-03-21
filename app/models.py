@@ -31,5 +31,12 @@ class Avaliacao(models.Model):
 	avaliador = models.ForeignKey('auth.User')
 
 	def  __str__(self):
-		#return str(self.candidato)
-		return str(self.t)
+		return str(self.candidato)
+		
+
+class Teste(models.Model):
+	v1 = models.CharField(max_length=222, default='')
+	v2 = models.CharField(max_length=22, default='')
+
+	def __str__(self):
+		return self.v1
