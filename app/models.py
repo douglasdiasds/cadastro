@@ -25,7 +25,7 @@ class Candidato(models.Model):
 
 
 class Avaliacao(models.Model):
-	candidato = models.ForeignKey(Candidato)
+	candidato = models.ForeignKey(Candidato, unique=True)
 	criterio = models.ForeignKey(Criterio, default='')
 	nota = models.PositiveIntegerField(default = 0, validators=[MaxValueValidator(10)])
 	avaliador = models.ForeignKey('auth.User')

@@ -15,32 +15,16 @@ def candidato_detalhe(request, pk):
     return render(request, 'app/candidato_detalhe.html', {'candidato': candidato})
 
 def avaliar(request):
-	##################################################################################
-	aval = Avaliacao.objects.all()			#
-	lista_cand = []							#
-	for a in aval:							#nesse bloco eu ponho tds os avaliadores
-		lc = str(a.avaliador)				#existentes em uma lista	
-		lista_cand += [lc]					#
-	##################################################################################
-
 	if request.method == "POST":
 		form2 = AvalForm(request.POST)
-		#############################################
-		if form2.is_valid():
-			avaliador = form2.cleaned_data['avaliador']	###ai aqui eu guardo o avaliador atual na variavel
-			avaliador = str(avaliador)
 
-			### aqui eu faço o teste
-			cont = 0 
-			for l in lista_cand:
-				if avaliador == l:
-					cont += 1
-				
+		if form2.is_valid():	
 			post = form2.save(commit=False)
 			#avaliador = form2.fields['avaliador']
 			post.save()
 			#faz redirecionara para uma page que só tenha{'avaliador': avaliador} p/ testar a variavel avaliador
 			return redirect('canditato_list') 
+
 	else:
 		form2 = AvalForm()
 		#avaliador = form2.fields['avaliador']
