@@ -1,44 +1,69 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Candidato, Criterio, Avaliacao
+from .models import Candidate, Criterion, Evaluation
 from django import forms
 from .forms import CandForm
-from .forms import AvalForm
+from .forms import EvalForm
 from django.shortcuts import redirect
 
 
-def canditato_list(request):
-	candidatos = Candidato.objects.all()
-	return render(request, 'app/candidato_list.html', {'candidatos': candidatos})
+def canditate_list(request):
+	candidates = Candidate.objects.all()
+	
+	eva = Evaluation.objects.all()
+	eval_cand_list = []										#aqui guarda uma lista com os FK candidates convertidos p/ str
 
-def candidato_detalhe(request, pk):
-    candidato = get_object_or_404(Candidato, pk=pk)
-    return render(request, 'app/candidato_detalhe.html', {'candidato': candidato})
+	context = {
+		'candidates': candidates,
+		'eva': eva
+	}
+	return render(request, 'app/candidate_list.html',context)
 
-def avaliar(request):
+def candidate_detail(request, pk):
+    candidate = get_object_or_404(Candidate, pk=pk)
+    c_name = candidate.name             					#pega o nome (string) do candidato
+    c1 = Evaluation.objects.all()							#guarda tds Evaluation na variavel	
+    scores = []												#declara a array que vai receber as notas
+    for c in c1:											
+    	cand = str(c.candidate)								#guarda o nome do candidato do Evaluation atual
+    	if cand == c_name:									#confere se o Evaluation atual corresponde ao candidate atual(pk)
+    		scores += [c.score]
+
+    _sum = 0												#variavel que guardara a soma declarada
+    for s in scores:
+    	_sum += s                                           #faz a soma dos scores
+
+    average = _sum/len(scores)								#tira a média
+
+    context = {
+    	'candidate': candidate,
+    	'average': average
+    }
+    
+
+
+    return render(request, 'app/candidate_detail.html', context)
+
+def evaluation(request):
 	if request.method == "POST":
-		form2 = AvalForm(request.POST)
+		form2 = EvalForm(request.POST)
 
 		if form2.is_valid():	
 			post = form2.save(commit=False)
-			#avaliador = form2.fields['avaliador']
 			post.save()
-			#faz redirecionara para uma page que só tenha{'avaliador': avaliador} p/ testar a variavel avaliador
-			return redirect('canditato_list') 
+			return redirect('canditate_list') 
 
 	else:
-		form2 = AvalForm()
-		#avaliador = form2.fields['avaliador']
-		#teste
-		return render(request, 'app/avaliacao.html', {'criterios': form2,})
+		form2 = EvalForm()
+		return render(request, 'app/evaluation.html', {'criterions': form2,})
 
 	
-def cadastrar(request):
+def register(request):
 	if request.method == "POST":
 		form = CandForm(request.POST)
 		if form.is_valid():
 			post = form.save(commit=False)
 			post.save()
-			return redirect('candidato_detalhe', pk=post.pk)
+			return redirect('candidate_detail', pk=post.pk)
 	else:
 		form = CandForm()
-	return render(request, 'app/cadastro.html', {'form': form})
+	return render(request, 'app/register.html', {'form': form})

@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import Criterio, Candidato, Avaliacao, Teste
+from .models import Criterion, Candidate, Evaluation
 
-admin.site.register(Candidato)
-admin.site.register(Criterio)
-admin.site.register(Avaliacao)
-#admin.site.register(Teste)
+admin.site.register(Candidate)
+admin.site.register(Criterion)
+admin.site.register(Evaluation)

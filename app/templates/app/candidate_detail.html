@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+{% block content %}
+	<p>teste</p>
+	<p>Nome: {{ candidate.name }}</p>
+	<p>E-mail: {{ candidate.e_mail }}</p>
+	<p>Github: {{ candidate.github }} </p>
+	<p>Linkedin: {{ candidate.linkedin }} </p>
+	<p>Ensino_superior: {{ candidate.higher_education }}</p>
+	<p>Carta de apresentação: {{ candidate.cover_letter }} </p>
+	<p>Média: {{ average }}</p>
+	<p><a href="{% url 'evaluate' %}">avaliar</a></p>
+	<p><a href="{% url 'canditate_list' %}">home</a></p>
+{% endblock content %}
+</body>
+</html>

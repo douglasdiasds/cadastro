@@ -3,9 +3,9 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-	url(r'^$', views.canditato_list, name='canditato_list'),
-	url(r'^candidato/(?P<pk>[0-9]+)/$', views.candidato_detalhe, name='candidato_detalhe'),
-	url(r'^cadastrar/$', views.cadastrar, name='cadastrar'),	# <--! o cadastro fica num link independete
-	url(r'^candidato/[0-9]+/avaliacao/$', views.avaliar, name='avaliar'), 
+	url(r'^$', views.canditate_list, name='canditate_list'),
+	url(r'^candidato/(?P<pk>[0-9]+)/$', views.candidate_detail, name='candidate_detail'),
+	url(r'^cadastrar/$', views.register, name='register'),	# <--! o cadastro fica num link independete
+	url(r'^candidato/[0-9]+/avaliacao/$', views.evaluation, name='evaluate'), 
 
 ]

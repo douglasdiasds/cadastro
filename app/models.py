@@ -3,40 +3,39 @@ from jsonfield import JSONField
 from site_.settings import MEDIA_ROOT
 from django.core.validators import MaxValueValidator
 
-class Criterio(models.Model):
+class Criterion(models.Model):
 	label = models.CharField(max_length=100)
 
 	def  __str__(self):
 		return self.label
 
-class Candidato(models.Model):
+class Candidate(models.Model):
 	name = models.CharField(max_length=100)
 	e_mail = models.EmailField(max_length=100, default = '')
 	github = models.URLField(default = '')
 	linkedin = models.URLField(max_length=100, default = '')
 	cover_letter = models.TextField(default = '')
-	Ensino_superior = models.BooleanField(default = False)
-	med = models.IntegerField(default = 0)
-	#talvez tenha que alterrar essa linha
+	higher_education = models.BooleanField(default = False)
+	average = models.IntegerField(default = 0)
+	#############################################################score = models.ForeignKey()
 	docfile = models.FileField(upload_to='/home/douglas/Documentos/Django/my-second-blog/site_/media', null=True, blank=True)
 
 	def  __str__(self):
 		return self.name
 
 
-class Avaliacao(models.Model):
-	candidato = models.ForeignKey(Candidato, unique=True)
-	criterio = models.ForeignKey(Criterio, default='')
-	nota = models.PositiveIntegerField(default = 0, validators=[MaxValueValidator(10)])
-	avaliador = models.ForeignKey('auth.User')
+class Evaluation(models.Model):
+	candidate = models.ForeignKey(Candidate, unique=True)
+	criterion = models.ForeignKey(Criterion, default='')
+	score = models.PositiveIntegerField(default = 0, validators=[MaxValueValidator(10)])
+	appraiser = models.ForeignKey('auth.User')
 
 	def  __str__(self):
-		return str(self.candidato)
-		
+		return str(self.candidate)
 
-class Teste(models.Model):
-	v1 = models.CharField(max_length=222, default='')
-	v2 = models.CharField(max_length=22, default='')
 
-	def __str__(self):
-		return self.v1
+class avarage(models.Model):
+	eva = Evaluation.objects.get()
+
+
+

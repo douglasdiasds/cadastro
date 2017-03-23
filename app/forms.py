@@ -1,14 +1,14 @@
-from .models import Candidato, Avaliacao, Teste
+from .models import Candidate, Evaluation
 from django import forms
 
 class CandForm(forms.ModelForm):
 	class Meta:
-		model = Candidato
-		fields = ('name', 'e_mail', 'github', 'linkedin', 'Ensino_superior','cover_letter')
+		model = Candidate
+		fields = ('name', 'e_mail', 'github', 'linkedin', 'higher_education','cover_letter')
 
-class AvalForm(forms.ModelForm):
+class EvalForm(forms.ModelForm):
 	class Meta:
-		model = Avaliacao
-		fields = ('candidato','criterio','nota','avaliador')
+		model = Evaluation
+		fields = ('candidate','criterion','score','appraiser')
 		#fields = ('v1','v2')
 		

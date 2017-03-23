@@ -11,15 +11,19 @@
 <body>
 	<h1><a href="/"> Lista de candidatos: </a></h1>
 	{% block content %}
-		{% for cand in candidatos %}
+		{% for cand in candidates %}
 			<p>
-			<div><a href="{% url 'candidato_detalhe' pk=cand.pk %}">Nome:{{ cand.name }}</a></div>
-			<div id="med">Média:{{cand.med}}</div>
+			<div><a href="{% url 'candidate_detail' pk=cand.pk %}">Nome:{{ cand.name }}</a></div>
+			<!--<div id="average">Média:{{cand.average}}</div>-->
 			</p>
+
+			{% for e in eva %}
+				{% if e.candidate |stringformat:" "  == cand.name %}
+					<p>{{ e.score }}</p>
+				{% endif %}	
+			{% endfor %}
+				
 		{% endfor %}
-		<!--<a href="{% url 'cadastrar' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a> 
-		/\ essa linha linka para a page de cadastro usando um botao na page que lista os cand
-		-->
 	{% endblock content %}
 
 	<P>{{ avaliador }}</P>
