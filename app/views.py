@@ -32,7 +32,9 @@ def candidate_detail(request, pk):
     for s in scores:
     	_sum += s                                           #faz a soma dos scores
 
-    average = _sum/len(scores)								#tira a média
+    average = 0	
+    if len(scores) > 0:
+    	average = _sum/len(scores)								#tira a média
 
     context = {
     	'candidate': candidate,

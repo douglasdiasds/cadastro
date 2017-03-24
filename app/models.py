@@ -34,8 +34,6 @@ class Evaluation(models.Model):
 		return str(self.candidate)
 
 
-class avarage(models.Model):
-	eva = Evaluation.objects.get()
 
 
 

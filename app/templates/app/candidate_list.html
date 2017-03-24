@@ -12,17 +12,14 @@
 	<h1><a href="/"> Lista de candidatos: </a></h1>
 	{% block content %}
 		{% for cand in candidates %}
-			<p>
-			<div><a href="{% url 'candidate_detail' pk=cand.pk %}">Nome:{{ cand.name }}</a></div>
+		<div class="div">
+			<p class="fp"><a href="{% url 'candidate_detail' pk=cand.pk %}">{{ cand.name }}</a></p>
 			<!--<div id="average">Média:{{cand.average}}</div>-->
-			</p>
 
-			{% for e in eva %}
-				{% if e.candidate |stringformat:" "  == cand.name %}
-					<p>{{ e.score }}</p>
-				{% endif %}	
+			{% for e in cand.evaluation_set.all %}
+    			<p class="sp">Média: {{ e.score }}</p>
 			{% endfor %}
-				
+		</div>
 		{% endfor %}
 	{% endblock content %}
 

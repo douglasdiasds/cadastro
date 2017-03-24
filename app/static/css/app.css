@@ -2,8 +2,18 @@ body {
 	background-color: #dbffdb
 }
 
-#med {
-	color: red;
-	background-color: black;
-	width: 10%
+.div {
+	background-color: #42f453;
+}
+
+.fp {
+	font-size: 20px;
+	display: inline-block;
+}
+
+.sp {
+
+	display: inline-block;
+	margin-left: 50px;
+	font-size: 20px;
 }
