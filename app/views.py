@@ -4,6 +4,7 @@ from django import forms
 from .forms import CandForm
 from .forms import EvalForm
 from django.shortcuts import redirect
+from django.db import IntegrityError
 
 
 def canditate_list(request):
@@ -41,24 +42,24 @@ def candidate_detail(request, pk):
     	'average': average
     }
     
-
-
     return render(request, 'app/candidate_detail.html', context)
 
+
 def evaluation(request):
-	if request.method == "POST":
-		form2 = EvalForm(request.POST)
+    # form2 initialization
+    form2 = EvalForm()
 
-		if form2.is_valid():	
-			post = form2.save(commit=False)
-			post.save()
-			return redirect('canditate_list') 
+    if request.method == "POST":
+        form2 = EvalForm(request.POST)
+        if form2.is_valid():    
+            post = form2.save(commit=False)
+            try:
+                post.save()
+                return redirect('canditate_list')
+            except IntegrityError:
+            	return HttpResponse("Você já avaliou este candidato!")
+    return render(request, 'app/evaluation.html', {'criterions': form2,})
 
-	else:
-		form2 = EvalForm()
-		return render(request, 'app/evaluation.html', {'criterions': form2,})
-
-	
 def register(request):
 	if request.method == "POST":
 		form = CandForm(request.POST)
