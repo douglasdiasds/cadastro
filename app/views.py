@@ -59,6 +59,7 @@ def evaluation(request):
             except IntegrityError:
             	return HttpResponse("Você já avaliou este candidato!")
     return render(request, 'app/evaluation.html', {'criterions': form2,})
+    
 
 def register(request):
 	if request.method == "POST":
