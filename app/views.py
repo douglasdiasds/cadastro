@@ -71,3 +71,7 @@ def register(request):
 	else:
 		form = CandForm()
 	return render(request, 'app/register.html', {'form': form})
+
+
+def grid(request):
+	return render(request, 'app/grade.html')
