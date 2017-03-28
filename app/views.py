@@ -74,4 +74,39 @@ def register(request):
 
 
 def grid(request):
-	return render(request, 'app/grade.html')
+	evaluation = Evaluation.objects.all()
+	var = []
+
+	cont = 0
+	evaluators = []
+	for evaluator in evaluation:
+		cont = 0
+		for e in evaluators:
+			if e != evaluator.appraiser:
+				cont += 1
+
+		if cont == len(evaluators):
+			evaluators += [evaluator.appraiser]
+
+
+	cont = 0
+	candidates = []
+	for cand in evaluation:
+		cont = 0
+		for c in candidates:
+			if c != cand.candidate:
+				cont += 1
+
+		if cont == len(candidates):
+			candidates += [cand.candidate]
+
+	cont = 0		
+	context = {
+		'evaluators':evaluators,
+		'evaluation':evaluation, 
+		'var':var,
+		'candidates':candidates, 
+		'cont':cont,
+	}
+
+	return render(request, 'app/grade.html', context)
