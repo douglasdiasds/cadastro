@@ -17,7 +17,6 @@ class Candidate(models.Model):
 	cover_letter = models.TextField(default = '')
 	higher_education = models.BooleanField(default = False)
 	average = models.IntegerField(default = 0)
-	#############################################################score = models.ForeignKey()
 	docfile = models.FileField(upload_to='/home/douglas/Documentos/Django/my-second-blog/site_/media', null=True, blank=True)
 
 	def  __str__(self):
@@ -25,10 +24,18 @@ class Candidate(models.Model):
 
 
 class Evaluation(models.Model):
-	candidate = models.ForeignKey(Candidate, unique=True)
+	candidate = models.ForeignKey(Candidate)
 	criterion = models.ForeignKey(Criterion, default='')
 	score = models.PositiveIntegerField(default = 0, validators=[MaxValueValidator(10)])
 	appraiser = models.ForeignKey('auth.User')
 
 	def  __str__(self):
 		return str(self.candidate)
+
+#model de teste
+class Teste(models.Model):
+	nome = models.CharField(max_length=10)
+
+	def  __str__(self):
+		return str(self.nome)
+		

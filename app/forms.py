@@ -1,4 +1,4 @@
-from .models import Candidate, Evaluation
+from .models import Candidate, Evaluation, Teste
 from django import forms
 
 class CandForm(forms.ModelForm):
@@ -10,5 +10,13 @@ class EvalForm(forms.ModelForm):
 	class Meta:
 		model = Evaluation
 		fields = ('candidate','criterion','score','appraiser')
-		#fields = ('v1','v2')
+
+
+#formulário de teste
+class TestForm(forms.ModelForm):
+	class Meta:
+		model =  Teste
+		fields = ('nome',)
+			
+		
 		
