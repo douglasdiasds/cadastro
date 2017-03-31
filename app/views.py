@@ -13,10 +13,13 @@ def canditate_list(request):
 	
 	eva = Evaluation.objects.all()
 	eval_cand_list = []										#aqui guarda uma lista com os FK candidates convertidos p/ str
-
+	var = 0
+	var2 = {'v1':2}
 	context = {
 		'candidates': candidates,
-		'eva': eva
+		'eva': eva,
+		'var': var,
+		'var2':var2
 	}
 	return render(request, 'app/candidate_list.html',context)
 
@@ -75,7 +78,9 @@ def evaluation(request):
             	post.save()
             	return redirect('canditate_list')
             else:
-            	print("teste")
+            	form2 = EvalForm()
+            	error = 'Você já valiou esse candidato'
+            	return render(request, 'app/evaluation.html', {'criterions': form2,'error':error})
     else:
         form2 = EvalForm()
     return render(request, 'app/evaluation.html', {'criterions': form2,})
@@ -96,10 +101,8 @@ def register(request):
 
 def grid(request):
 	evaluation = Evaluation.objects.all()			#querryset com tds os obj avaliação
-	var = []
-
 	cont = 0
-	evaluators = []									#lista que guarda os avaliador sem repeti-los
+	evaluators = []									#lista que guarda os avaliadores sem repeti-los
 	for evaluator in evaluation:
 		cont = 0
 		for e in evaluators:
@@ -121,16 +124,37 @@ def grid(request):
 		if cont == len(candidates):
 			candidates += [cand.candidate]
 
-
+	
 	#							Numero de colunas				Numero de linhas					
-	matrice = [[0 for i in range(len(evaluators))] for j in range(len(candidates))]	
+	matrice = [[0 for i in range(len(evaluators)+1)] for j in range(len(candidates)+1)]	
+
+	cont_c = 0
+	cont_a = 0
+	for l in range(len(matrice)):
+		for c in range(len(matrice[l])):
+			if l == 0 and c > 0:
+				matrice[l][c] = str(evaluators[cont_a])
+				cont_a += 1
+			if l > 0 and c == 0:
+				matrice[l][c] = str(candidates[cont_c])
+				cont_c += 1
+
+	cont_c = 0
+	cont_a = 0
+	for e in evaluation:
+		for l in range(len(matrice)):
+			if str(e.candidate) == matrice[l][0]:
+				for c in range(len(matrice[l])):
+					if str(e.appraiser) == matrice[0][c]:
+						if matrice[l][c] == 0:
+							matrice[l][c] = e.score
+							break
 
 
 	cont = 0		
 	context = {										#aqui eh o nome que as variaveis terao la no template
 			'evaluators':evaluators,
-			'evaluation':evaluation, 
-			'var':var,
+			'evaluation':evaluation,
 			'candidates':candidates, 
 			'cont':cont,
 			'matrice':matrice,

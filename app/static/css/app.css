@@ -6,9 +6,9 @@ body {
 	background-color: #42f453;
 }
 
-.fp {
+.tr {
 	font-size: 20px;
-	display: inline-block;
+	background-color: black;
 }
 
 .sp {
@@ -17,4 +17,5 @@ body {
 	margin-left: 50px;
 	font-size: 20px;
 	color: red;
+	padding:10px;
 }

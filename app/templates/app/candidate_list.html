@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load mathfilters %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,10 @@
 			<!--<div id="average">Média:{{cand.average}}</div>-->
 
 			{% for e in cand.evaluation_set.all %}
-    			<p class="sp">Média: {{ e.score }}</p>
+    			<!--<p class="sp">Média: {{ e.score }}</p>-->
+    			{%with e.score as var %}
+    				<p class="sp">{{var}}</p>
+    			{%endwith%}	
 			{% endfor %}
 		</div>
 		{% endfor %}
