@@ -14,16 +14,7 @@
 	{% block content %}
 		{% for cand in candidates %}
 		<div class="div">
-			<p class="fp"><a href="{% url 'candidate_detail' pk=cand.pk %}">{{ cand.name }}</a></p>
-			<!--<div id="average">Média:{{cand.average}}</div>-->
-
-			{% for e in cand.evaluation_set.all %}
-    			<!--<p class="sp">Média: {{ e.score }}</p>-->
-    			{%with e.score as var %}
-    				<p class="sp">{{var}}</p>
-    			{%endwith%}	
-			{% endfor %}
-		</div>
+			<p class="fp"><a href="{% url 'candidate_detail' pk=cand.pk %}">{{ cand.name }}</a></p>	
 		{% endfor %}
 	{% endblock content %}
 
