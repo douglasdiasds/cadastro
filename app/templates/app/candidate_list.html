@@ -10,15 +10,11 @@
 	<link href="{% static 'css/app.css' %}" rel="stylesheet">	
 </head>
 <body>
-	<h1><a href="/"> Lista de candidatos: </a></h1>
-	{% block content %}
-		{% for cand in candidates %}
-		<div class="div">
-			<p class="fp"><a href="{% url 'candidate_detail' pk=cand.pk %}">{{ cand.name }}</a></p>	
-		{% endfor %}
-	{% endblock content %}
+	<h1 class="h1t">Lista de Candidatos</h1>
+	{% for l in lista2 %}
+		<p class="tr">{{l}}</p>
+	{% endfor %}
 
-	<P>{{ avaliador }}</P>
 </body>
 </html>
 

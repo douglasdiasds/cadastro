@@ -6,20 +6,44 @@ from .forms import EvalForm
 from .forms import TestForm
 from django.shortcuts import redirect
 from django.db import IntegrityError
+import re
 
 
 def canditate_list(request):
 	candidates = Candidate.objects.all()
+	evaluation = Evaluation.objects.all()
+
+	######################## Ponho todos os candidatos e suas respectivas médias em um array em formato dict({Candidato:N})
+	sum = 0
+	cont = 1
+	med = 0
+	lista = []
+	for cand in candidates:
+		cont = 0
+		sum = 0
+		med = 0
+		for e in evaluation:
+			if cand == e.candidate:
+				sum += e.score
+				cont += 1
+		if cont > 0:
+			med = sum / cont  
+   
+		data = {str(cand):med}				## a Key recebe o candidato no formato string
+		lista += [data]
+
+	##### passo os dicionários contidos na lista anterior para outra lista convertendo-os em string
+	lista2 = []
+	for l in lista:
+		lista2 += [str(l)]
+
+	lista2 = [re.sub(r'[^\w\d.:]+',"",e) for e in lista2]
 	
-	eva = Evaluation.objects.all()
 	eval_cand_list = []										#aqui guarda uma lista com os FK candidates convertidos p/ str
-	var = 0
-	var2 = {'v1':2}
 	context = {
 		'candidates': candidates,
-		'eva': eva,
-		'var': var,
-		'var2':var2
+		'evaluation': evaluation,
+		'lista2':lista2
 	}
 	return render(request, 'app/candidate_list.html',context)
 
