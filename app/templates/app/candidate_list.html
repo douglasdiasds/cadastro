@@ -11,8 +11,8 @@
 </head>
 <body>
 	<h1 class="h1t">Lista de Candidatos</h1>
-	{% for l in lista2 %}
-		<p class="tr">{{l}}</p>
+	{% for l in candidates %}
+		<p class="tr"><a href="{% url 'candidate_detail' l.pk %}">{{l}}</a></p>
 	{% endfor %}
 
 </body>
