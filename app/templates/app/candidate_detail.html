@@ -1,19 +1,21 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
 	<title></title>
+	<link href="{% static 'css/app.css' %}" rel="stylesheet">
 </head>
 <body>
 {% block content %}
-	<p>Nome: {{ candidate.name }}</p>
-	<p>E-mail: {{ candidate.e_mail }}</p>
-	<p>Github: {{ candidate.github }} </p>
-	<p>Linkedin: {{ candidate.linkedin }} </p>
-	<p>Ensino_superior: {{ candidate.higher_education }}</p>
-	<p>Carta de apresentação: {{ candidate.cover_letter }} </p>
-	<p>Média: {{ average }}</p>
-	<p><a href="{% url 'evaluate' %}">avaliar</a></p>
-	<p><a href="{% url 'canditate_list' %}">home</a></p>
+	<p class="sp2">Nome: {{ candidate.name }}</p>
+	<p class="sp2">E-mail: {{ candidate.e_mail }}</p>
+	<p class="sp2">Github: {{ candidate.github }} </p>
+	<p class="sp2">Linkedin: {{ candidate.linkedin }} </p>
+	<p class="sp2">Ensino_superior: {{ candidate.higher_education }}</p>
+	<p class="sp2">Carta de apresentação: {{ candidate.cover_letter }} </p>
+	<p class="sp2">Média: {{ average }}</p>
+	<p class="sp2"><a href="{% url 'evaluate' %}">avaliar</a></p>
+	<p class="sp2"><a href="{% url 'canditate_list' %}">home</a></p>
 {% endblock content %}
 </body>
 </html>

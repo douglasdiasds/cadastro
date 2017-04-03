@@ -16,8 +16,9 @@ class Candidate(models.Model):
 	linkedin = models.URLField(max_length=100, default = '')
 	cover_letter = models.TextField(default = '')
 	higher_education = models.BooleanField(default = False)
-	average = models.IntegerField(default = 0)
 	docfile = models.FileField(upload_to='/home/douglas/Documentos/Django/my-second-blog/site_/media', null=True, blank=True)
+
+
 
 	def  __str__(self):
 		return self.name

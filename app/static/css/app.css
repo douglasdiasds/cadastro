@@ -20,8 +20,27 @@ body {
 	font-size: 20px;
 	color: #e88b00;
 	padding:10px;
+	border:15px;
+	border-color: black;
 }
 
-.none {
-	color: red;
+.sp2{
+	margin-left: 50px;
+	font-size: 20px;
+	color:#e88b00;
+	border:5px;
+}
+
+.sp3{
+	display: inline-block;
+	margin-left: 50px;
+	font-size: 20px;
+	color: #e88b00;
+	opacity: 0;
+}
+
+.table {
+	border: 15px;
+	border-color: #188255;
+
 }

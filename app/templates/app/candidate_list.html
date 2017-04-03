@@ -12,9 +12,15 @@
 <body>
 	<h1 class="h1t">Lista de Candidatos</h1>
 	{% for l in candidates %}
-		<p class="tr"><a href="{% url 'candidate_detail' l.pk %}">{{l}}</a></p>
+		<div class="tr">
+		<p class="sp"><a href="{% url 'candidate_detail' l.pk %}">{{l}}</a></p>
+		{% for k, v in dic.items %}
+			{% if l.name == k %}
+				<p class="sp">{{v}}</p>
+			{%endif%}
+		{% endfor %}
+		</div>
 	{% endfor %}
-
 </body>
 </html>
 

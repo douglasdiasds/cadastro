@@ -7,43 +7,24 @@ from .forms import TestForm
 from django.shortcuts import redirect
 from django.db import IntegrityError
 import re
+from django.db.models import Avg
 
 
 def canditate_list(request):
 	candidates = Candidate.objects.all()
 	evaluation = Evaluation.objects.all()
 
-	######################## Ponho todos os candidatos e suas respectivas médias em um array em formato dict({Candidato:N})
-	sum = 0
-	cont = 1
-	med = 0
-	lista = []
+	dic = {}
 	for cand in candidates:
-		cont = 0
-		sum = 0
-		med = 0
-		for e in evaluation:
-			if cand == e.candidate:
-				sum += e.score
-				cont += 1
-		if cont > 0:
-			med = sum / cont  
-   
-		data = {str(cand):med}				## a Key recebe o candidato no formato string
-		lista += [data]
+		average = Evaluation.objects.filter(candidate = cand).aggregate(Avg('score'))['score__avg']
+		candname = str(cand.name)
+		dic.update({candname:average})
 
-	##### passo os dicionários contidos na lista anterior para outra lista convertendo-os em string
-	lista2 = []
-	for l in lista:
-		lista2 += [str(l)]
-
-	lista2 = [re.sub(r'[^\w\d.:]+',"",e) for e in lista2]
-	
-	eval_cand_list = []										#aqui guarda uma lista com os FK candidates convertidos p/ str
 	context = {
 		'candidates': candidates,
 		'evaluation': evaluation,
-		'lista2':lista2
+		'average':average,
+		'dic':dic
 	}
 	return render(request, 'app/candidate_list.html',context)
 
@@ -72,18 +53,7 @@ def candidate_detail(request, pk):
     
     return render(request, 'app/candidate_detail.html', context)
 
-"""
-def evaluation(request):
-    list_evaluation = Evaluation.objects.all()
-    form2 = EvalForm()
-    cont = 0
 
-    if request.method == "POST":
-    	form2 = EvalForm(request.POST)
-    	if form2.is_valid():
-    		for ev in list_evaluation:
-    			cont += 1
-"""
 def evaluation(request):
     # form2 initialization
     list_evaluation = Evaluation.objects.all()
@@ -109,6 +79,8 @@ def evaluation(request):
         form2 = EvalForm()
     return render(request, 'app/evaluation.html', {'criterions': form2,})
 
+
+
 def register(request):
 	list_evaluation = Evaluation.objects.all()
 
@@ -121,6 +93,8 @@ def register(request):
 	else:
 		form = CandForm()
 	return render(request, 'app/register.html', {'form': form})
+
+
 
 
 def grid(request):

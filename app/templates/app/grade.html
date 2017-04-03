@@ -6,13 +6,23 @@
   <link href="{% static 'css/app.css' %}" rel="stylesheet">
 </head>
 <body>
+<table>
 {% for m in matrice %}
-  <div class="fp">
+  <tr class="table">
   	{% for n in m %}
-        <p class="sp">{{n}}</p>
+  	<td> 
+  		{% if n == 0 %}
+  			<p class="sp3">{{n}}</p>
+  		{% endif %}
+
+        {% if n != 0 %}
+        	<p class="sp">{{n}}</p>
+        {% endif %}
+  	</td>
   	{% endfor %}
-  </div>
+  </tr>
 {% endfor %}
+</table>
 </table>
 </body>
 </html>
